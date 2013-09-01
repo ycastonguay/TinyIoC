@@ -16,7 +16,7 @@
 #region Preprocessor Directives
 // Uncomment this line if you want the container to automatically
 // register the TinyMessenger messenger/event aggregator
-//#define TINYMESSENGER
+#define TINYMESSENGER
                     
 // PCL profile supports System.Linq.Expressions
 // PCL profile does not support compiling expressions (due to restriction in MonoTouch)
@@ -37,6 +37,8 @@
 
 #endregion
 
+using TinyMessenger;
+
 namespace TinyIoC
 {
     using System;
@@ -45,7 +47,7 @@ namespace TinyIoC
     using System.Linq;
     using System.Reflection;
     using System.Linq.Expressions;
-    using System.Threading;
+    using System.Threading;    
 
     #region SafeDictionary
     public class SafeDictionary<TKey, TValue> : IDisposable
@@ -2847,7 +2849,7 @@ namespace TinyIoC
 #if TINYMESSENGER
             // Only register the TinyMessenger singleton if we are the root container
             if (_Parent == null)
-                Register<TinyMessenger.ITinyMessengerHub, TinyMessenger.TinyMessengerHub>();
+                Register<ITinyMessengerHub, TinyMessengerHub>();
 #endif
         }
 
@@ -3412,6 +3414,10 @@ namespace TinyIoC
         }
 
         #endregion
+    }
+
+    internal class TinyMessenger
+    {
     }
 }
 
